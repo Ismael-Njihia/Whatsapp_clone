@@ -6,11 +6,11 @@ login.onclick = function() {
     const password = document.getElementById("password").value;
 
     //run a firebase funcion to sign up the user
-    firebase.auth().SignInwithEmailAndPassword(email, password).then((userCred) => {
-        console.log(userCred);
+    firebase.auth().signInWithEmailAndPassword(email, password).then((userCred) => {
+        alert("Login Successful");
         window.location.href = "home.html";
     }).catch((error) => {
-        const err = error.message;
-        console.log(err);
+        const error1 = error.mesage;
+        alert(error1);
     })
 }
