@@ -23,31 +23,24 @@
     <section id="container">
         <div class="Center">
             <div class="header">
-                <h1>Welcome Back, We Missed you</h1>
-                <h1>Sign In to Continue...</h1>
+                <h1>Forgot Your password?</h1>
+                <h1>I got You</h1>
             </div>
 
             <div class="login"></div>
             <div class="mb-3">
                 <input type="email" class="form-control" id="email" placeholder="Enter your email...">
                 <br>
-                <input type="password" class="form-control" id="password" placeholder="Enter your Password">
+
+                <button type="submit" class="btn btn-primary" id="Reset">Reset</button>
+
+
                 <br>
-
-                <button type="submit" class="btn btn-primary" id="login">Sign In</button>
-
-                <div class="spinner-grow text-primary" role="status" id="waiting" style="display: none;">
-                    <span class="visually-hidden" style="display: none;">Loading...</span>
-                </div>
-                <br>
-                <a href="index.html" id="anchor">Don't have an account? create one</a>
-
+                <a href="index.html" id="anchor" class="Anchor">Don't have an account? create one</a>
 
             </div>
         </div>
-        <div class="end">
-            <p><a href="forgot.html">Forgot your password? Reset it</a></p>
-        </div>
+
         <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
             <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
@@ -69,7 +62,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
 
     <script src="../Whatsapp_clone/js/config.js"></script>
-    <script src="../Whatsapp_clone/js/login.js"></script>
+    <script src="../Whatsapp_clone/js/forgot.js"></script>
 
 </body>
 
