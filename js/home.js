@@ -7,6 +7,9 @@ firebase.auth().onAuthStateChanged((user) => {
         //currentUsername
         let CUserName = user.name;
 
+        document.getElementById("welcome").innerText = "Signed in as" + " " + CUserEmail;
+        document.getElementById("welcome").style.color = "green";
+
         //timestamp
         const timestamp = new Date();
         console.log(timestamp, CUserId, CUserEmail, CUserName);
@@ -19,7 +22,12 @@ firebase.auth().onAuthStateChanged((user) => {
                 let email = doc.data().email;
                 let id = doc.data().id;
                 let ProfImage = doc.data().ProfImage;
-                document.getElementById("welcome").innerText = "Welcome" + " " + name;
+                if (id == CUserId) {
+                    document.getElementById("welcome").innerText = "Welcome" + " " + name;
+                } else {
+
+                }
+
 
                 content += '<div class="user">';
                 content += '<div class="user-img">';
