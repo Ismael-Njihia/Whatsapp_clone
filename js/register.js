@@ -1,9 +1,10 @@
-document.getElementById("signup").onclick = function() {
+console.log("register.js loaded");
+document.getElementById("signUp").onclick = function() {
     // Get the values from the form
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const name = document.getElementById("name").value;
-
+    let email = document.getElementById("userEmail").value;
+    let password = document.getElementById("UserPassword").value;
+    let name = document.getElementById("fullName").value;
+    console.log(email, password, name);
     //create a new user
     firebase.auth().createUserWithEmailAndPassword(email, password).then((userCred) => {
         const userId = userCred.user.uid;

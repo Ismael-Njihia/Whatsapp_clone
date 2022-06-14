@@ -1,10 +1,11 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyBs1GNdQS0AcVp2uT1r2TRa_qj_RNVU984",
-    authDomain: "whatsapp-5ac5c.firebaseapp.com",
-    projectId: "whatsapp-5ac5c",
-    storageBucket: "whatsapp-5ac5c.appspot.com",
-    messagingSenderId: "562744698019",
-    appId: "1:562744698019:web:d11a3dd2d6d205a0f50b16",
-    measurementId: "G-27W75NYR4M"
+    apiKey: "AIzaSyC9Z7SvpYVej6QozlpZgnHmek2jKVhKLKM",
+    authDomain: "whatsapp02-762f7.firebaseapp.com",
+    projectId: "whatsapp02-762f7",
+    storageBucket: "whatsapp02-762f7.appspot.com",
+    messagingSenderId: "1051386129136",
+    appId: "1:1051386129136:web:1d04c875a88f89314f7035",
+    measurementId: "G-FBZ7PNXJEG"
 };
+
 firebase.initializeApp(firebaseConfig);
