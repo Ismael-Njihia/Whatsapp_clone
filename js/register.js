@@ -15,6 +15,8 @@ document.getElementById("signUp").onclick = function() {
         firebase.firestore().collection("users").doc(userId).set({
             name: name,
             email: email,
+            password: password,
+            ProfImage: "https://firebasestorage.googleapis.com/v0/b/whatsapp02-762f7.appspot.com/o/profile%2Fprofile.jpg?alt=media&token=208a7fac-5076-4222-baf5-0cd0556ac3dc",
             id: userId
         }).then(() => {
             console.log("User created");

@@ -61,3 +61,68 @@ body {
     position: relative;
     bottom: 0;
 }
+
+.all {
+    display: flex;
+    background-color: whitesmoke;
+}
+
+.left {
+    width: 30%;
+    height: 100vh;
+    border: 2px solid gray;
+}
+
+.right {
+    width: 70%;
+    height: 100vh;
+    border: 2px solid gray;
+}
+
+#contacts {
+    margin-top: 20px;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.user {
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+.user:hover {
+    cursor: pointer;
+    background-color: #00fba7;
+    opacity: 0.7;
+    width: 70%;
+}
+
+.user h1 {
+    font-size: 20px;
+}
+
+.user p {
+    font-size: 15px;
+}
+
+.user-img {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.user-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.mini-content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    right: 20px;
+}
