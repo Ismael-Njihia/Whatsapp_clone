@@ -91,15 +91,18 @@ body {
 }
 
 .user {
-    margin-left: 50px;
-    margin-top: 30px;
+    margin-left: 30px;
+    padding-top: 2.5px;
+    border-bottom: 1px solid gray;
+    padding-bottom: 2.5px;
+    display: flex;
 }
 
 .user:hover {
     cursor: pointer;
     background-color: #00fba7;
     opacity: 0.7;
-    width: 70%;
+    width: 100%;
 }
 
 .user h1 {
@@ -129,7 +132,7 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-    right: 20px;
+    margin-left: 10px;
 }
 
 .mini-content h1 {
@@ -160,4 +163,9 @@ body {
     position: relative;
     margin-top: 20px;
     margin-bottom: 30px;
+}
+
+#welcome {
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
 }

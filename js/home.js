@@ -12,10 +12,11 @@ firebase.auth().onAuthStateChanged((user) => {
 
         //timestamp
         const timestamp = new Date();
-        console.log(timestamp, CUserId, CUserEmail, CUserName);
+        //profile owner display
 
         //let's get all the users
         firebase.firestore().collection("users").get().then((snapshot) => {
+
             let content = '';
             snapshot.docs.forEach((doc) => {
                 let name = doc.data().name;
@@ -24,11 +25,10 @@ firebase.auth().onAuthStateChanged((user) => {
                 let ProfImage = doc.data().ProfImage;
                 if (id == CUserId) {
                     document.getElementById("welcome").innerText = "Welcome" + " " + name;
+
                 } else {
 
                 }
-
-
                 content += '<div class="user">';
                 content += '<div class="user-img">';
                 content += '<img src="' + ProfImage + '" alt="">';
@@ -42,6 +42,15 @@ firebase.auth().onAuthStateChanged((user) => {
 
             })
             $("#contacts").append(content);
+
+            //profile owner display
+            let contentProfile = '';
+            contentProfile += '<div class="user-img">';
+            contentProfile += '<img src="' + ProfImage + '" alt="">';
+            contentProfile += '</div>';
+            $("#welcome").append(contentProfile);
+
+
 
         })
 
