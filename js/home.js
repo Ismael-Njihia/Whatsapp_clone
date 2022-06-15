@@ -4,8 +4,6 @@ firebase.auth().onAuthStateChanged((user) => {
         let CUserId = user.uid;
         //logged in user email
         let CUserEmail = user.email;
-        //currentUsername
-        let CUserName = user.name;
 
         document.getElementById("welcome").innerText = "Signed in as" + " " + CUserEmail;
         document.getElementById("welcome").style.color = "green";
@@ -43,16 +41,36 @@ firebase.auth().onAuthStateChanged((user) => {
             })
             $("#contacts").append(content);
 
-            //profile owner display
-            let contentProfile = '';
-            contentProfile += '<div class="user-img">';
-            contentProfile += '<img src="' + ProfImage + '" alt="">';
-            contentProfile += '</div>';
-            $("#welcome").append(contentProfile);
-
-
-
         })
+
+
+        //receiving the reel image
+        document.getElementById("upload").onclick = function() {
+            let reel = document.getElementById("PostImage").files[0];
+            //on the storage
+            let storageRef = firebase.storage().ref();
+            //Creating a file to store the image
+            let uploaded = storageRef.child("reels/").child(Math.random() + reel.name).put(reel);
+            uploaded.on('state_changed', (snapshot) => {
+
+            }, (error) => {
+                erro1 = error.message;
+                alert(erro1);
+            }, () => {
+                //getting the url of the image
+                uploaded.snapshot.ref.getDownloadURL().then((url) => {
+                    //saving the url to the database
+                    firebase.firestore().collection("reels").add({
+                        ReelUrl: url,
+                        timestampUrl: timestamp,
+                        userId: CUserId,
+                        userEmail: CUserEmail,
+                    }).then(() => {
+                        window.location.reload();
+                    })
+                })
+            })
+        }
 
     } else {
         window.location.href = "index.html";
