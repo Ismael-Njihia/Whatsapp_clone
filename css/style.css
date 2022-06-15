@@ -203,3 +203,45 @@ top {
     border-radius: 10px;
     border: 1px solid gray;
 }
+
+.reel {
+    height: 200px;
+    width: 300px;
+    margin: 10px;
+    display: flex;
+}
+
+.reel-img {
+    height: 200px;
+    width: 300px;
+    object-fit: cover;
+    object-position: center;
+    display: flex;
+}
+
+.reel-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.mini-content1 {
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+.mini-content1 h1 {
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.mini-content1 h1:hover {
+    color: #00ea9c;
+}
+
+.mini-content1 p {
+    font-size: 10px;
+    text-align: center;
+}
