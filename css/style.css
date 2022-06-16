@@ -70,18 +70,20 @@ body {
 .all {
     display: flex;
     background-color: whitesmoke;
-    height: 100vh;
+    height: 200vh;
+    width: 100%;
 }
 
 .left {
-    width: 20%;
+    width: 30%;
     height: 100vh;
     border-right: 1px solid gray;
 }
 
 .right {
-    width: 80%;
-    height: 100vh;
+    position: relative;
+    width: 70%;
+    overflow-y: hidden;
 }
 
 #contacts {
@@ -174,6 +176,36 @@ body {
 
 /*home page right section
 * */
+
+.receivedUser {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 30px;
+    border-bottom: 1px solid gray;
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.chatBox {
+    position: absolute;
+    bottom: 0px;
+    display: flex;
+    align-items: center;
+    width: 70%;
+    padding-left: 5%;
+    padding-right: 5%;
+    border-top: 1px solid gray;
+    padding-top: 50px;
+    margin-bottom: 200px;
+}
+
+#chat {
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+
+/*ignore*/
 
 .top button {
     display: flex;

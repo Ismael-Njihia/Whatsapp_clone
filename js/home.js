@@ -17,115 +17,99 @@ firebase.auth().onAuthStateChanged((user) => {
         //let's get all the users
         firebase.firestore().collection("users").get().then((snapshot) => {
 
-            let content = '';
-            snapshot.docs.forEach((doc) => {
+                let content = '';
+                snapshot.docs.forEach((doc) => {
+                    let name = doc.data().name;
+                    let email = doc.data().email;
+                    let id = doc.data().id;
+                    let ProfImage = doc.data().ProfImage;
+
+                    let theLink = "home.html" + "?" + id;
+                    if (id == CUserId) {
+                        document.getElementById("welcome").innerText = "Welcome" + " " + name;
+
+                    } else {
+
+                    }
+                    content += '<a href="' + theLink + '" class="user">';
+                    content += '<div class="user-img">';
+                    content += '<img src="' + ProfImage + '" alt="">';
+                    content += '</div>';
+                    content += '<div class="mini-content">';
+                    content += '<h1>' + name + '</h1>';
+                    content += '<p>' + email + '</p>'
+                    content += '</div>';
+
+                    content += '</a>';
+
+                })
+                $("#contacts").append(content);
+
+            })
+            //receiving the ID from the URI
+        let receivedID = window.decodeURIComponent(window.location.search);
+        let theUserId = receivedID.substring(1);
+        //firebase
+        firebase.firestore().collection("users").doc(theUserId).get().then((doc) => {
                 let name = doc.data().name;
                 let email = doc.data().email;
                 let id = doc.data().id;
                 let ProfImage = doc.data().ProfImage;
-                if (id == CUserId) {
-                    document.getElementById("welcome").innerText = "Welcome" + " " + name;
 
-                } else {
+                document.getElementById("recUserName").innerText = name;
+                document.getElementById("recUserEmail").innerText = email;
+                document.getElementById("recUserImage").src = ProfImage;
+            })
+            //sending chats to the db
+        document.getElementById("sendChat").onclick = function() {
+            let chat = document.getElementById("chat").value;
+            let chatTime = timestamp;
 
-                }
-                content += '<div class="user">';
-                content += '<div class="user-img">';
-                content += '<img src="' + ProfImage + '" alt="">';
-                content += '</div>';
-                content += '<div class="mini-content">';
-                content += '<h1>' + name + '</h1>';
-                content += '<p>' + email + '</p>'
-                content += '</div>';
-
-                content += '</div>';
+            let sendChat = firebase.firestore().collection("chats").doc();
+            sendChat.set({
+                message: chat,
+                time: chatTime,
+                messageFrom: CUserId,
+                messageTo: theUserId,
+                docId: sendChat.id,
+                date: date
+            }).then(() => {
+                swal('message sent')
+                window.location.reload();
 
             })
-            $("#contacts").append(content);
+        }
 
-        })
+        // pulling the chats from the db
+        firebase.firestore().collection("chats").get().then((querySnapsot) => {
 
-
-        //receiving the reel image
-        document.getElementById("upload").onclick = function() {
-                let reel = document.getElementById("PostImage").files[0];
-                //on the storage
-                let storageRef = firebase.storage().ref();
-                //Creating a file to store the image
-                let uploaded = storageRef.child("reels/").child(Math.random() + reel.name).put(reel);
-                uploaded.on('state_changed', (snapshot) => {
-                    let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    let wholeNumber = Math.round(progress);
-
-                    //lets show the progress
-                    document.getElementById("progress").innerText = wholeNumber + "%";
-                    document.getElementById("progress").style.color = "green";
-                    document.getElementById("progressBar").style.width = wholeNumber + "%";
-                    //inform the user
-                    if (wholeNumber == 100) {
-                        document.getElementById("progress").innerText = "Uploaded";
-                        document.getElementById("progress").style.color = "green";
-                    }
-
-                    //getting the reel name and des
-
-                }, (error) => {
-                    erro1 = error.message;
-                    alert(erro1);
-                }, () => {
-                    //getting the url of the image
-                    uploaded.snapshot.ref.getDownloadURL().then((url) => {
-                        //saving the url to the database
-                        firebase.firestore().collection("reels").add({
-                            ReelUrl: url,
-                            timestampUrl: timestamp,
-                            userId: CUserId,
-                            userEmail: CUserEmail,
-                            date: date,
-                        }).then(() => {
-                            window.location.reload();
-                        })
-                    })
-                })
-            }
-            //getting the reel name and des
-            /*document.getElementById("Post").onclick = function() {
-                    let reelName = document.getElementById("reelName").value;
-                    let reelDesc = document.getElementById("reelDesc").value;
-                    //saving the reel name and des to the database
-                    firebase.firestore().collection("reels").add({
-                        reelName: reelName,
-                        reelDesc: reelDesc
-                    }).then(() => {
-                        window.location.reload();
-                    })*/
-
-        //display the reel
-        firebase.firestore().collection("reels").get().then((snapshot) => {
-            let content = '';
-            snapshot.docs.forEach((doc) => {
-                let ReelUrl = doc.data().ReelUrl;
-                let timestampUrl = doc.data().timestampUrl;
-                let userId = doc.data().userId;
-                let userEmail = doc.data().userEmail;
+            let contentChat = '';
+            querySnapsot.forEach((doc) => {
+                let message = doc.data().message;
+                let time = doc.data().time;
+                let messageFrom = doc.data().messageFrom;
+                let messageTo = doc.data().messageTo;
+                let docId = doc.data().docId;
                 let date = doc.data().date;
-                content += '<div class="reel">';
-                content += '<div class="reel-img">';
-                content += '<img src="' + ReelUrl + '" alt="">';
-                content += '</div>';
 
-                content += '<div class="mini-content1">';
-                content += '<h1>' + userEmail + '</h1>';
-                content += '<p>' + date + '</p>'
-                content += '<p>' + timestampUrl + '</p>'
-                content += '</div>';
-                content += '</div>';
-
-
-
+                if (messageFrom == CUserId && messageTo == theUserId) {
+                    content += '<div class="chat-bubble me">';
+                    content += '<p>' + message + '</p>';
+                    content += '<span>' + time + '</span>';
+                    content += '</div>';
+                } else if (messageTo == CUserId && messageFrom == theUserId) {
+                    content += '<div class="chat-bubble you">';
+                    content += '<p>' + message + '</p>';
+                    content += '<span>' + time + '</span>';
+                    content += '</div>';
+                }
             })
-            $("#reels").append(content);
+            $("#allChats").append(contentChat);
         })
+
+
+
+
 
     } else {
         window.location.href = "index.html";
