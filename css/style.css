@@ -93,10 +93,14 @@ body {
 }
 
 .user {
+    text-decoration: none;
+    color: #000;
     margin-left: 30px;
+    margin-right: 30px;
     padding-top: 2.5px;
     border-bottom: 1px solid gray;
     padding-bottom: 2.5px;
+    padding-left: 10px;
     display: flex;
 }
 
@@ -104,6 +108,7 @@ body {
     cursor: pointer;
     background-color: #00fba7;
     opacity: 0.7;
+    margin-right: 30px;
     width: 100%;
 }
 
@@ -122,6 +127,16 @@ body {
     border-radius: 50%;
     overflow: hidden;
     margin-top: 10px;
+}
+
+.userProfileD {
+    display: flex;
+    flex-direction: row;
+}
+
+.userdetails {
+    display: flex;
+    flex-direction: column;
 }
 
 .user-img img {
@@ -169,8 +184,8 @@ body {
 }
 
 #welcome {
-    border-bottom: 1px solid gray;
-    border-top: 1px solid gray;
+    margin-left: 40px;
+    margin-top: 10px;
 }
 
 
@@ -179,11 +194,25 @@ body {
 
 .receivedUser {
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding-left: 30px;
-    border-bottom: 1px solid gray;
+    border-bottom: 0.5px solid gainsboro;
     display: flex;
-    padding-bottom: 20px;
+    padding-bottom: 5px;
+}
+
+#recUserName {
+    font-size: 20px;
+}
+
+#recUserEmail {
+    font-size: 15px;
+}
+
+#recUserImage {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
 }
 
 .chatBox {
@@ -199,9 +228,30 @@ body {
     margin-bottom: 200px;
 }
 
-#chat {
+#allChats {
     padding-right: 20px;
     margin-right: 20px;
+}
+
+.theChatTo {
+    float: right;
+    background-color: #00ea9c;
+    padding: 20px;
+    border-radius: 5px;
+    height: fit-content;
+    width: fit-content;
+}
+
+.theChatFrom {
+    background-color: rgba(128, 128, 128, 0.244);
+    width: fit-content;
+    height: fit-content;
+    margin-left: 20px;
+    padding-top: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    border-radius: 5px;
 }
 
 

@@ -9,7 +9,7 @@ firebase.auth().onAuthStateChanged((user) => {
         document.getElementById("welcome").style.color = "green";
 
         //timestamp
-        const timestamp = new Date().toTimeString();
+        const timestamp = new Date().toTimeString(10);
         const date = new Date().toDateString();
         console.log(timestamp);
         //profile owner display
@@ -31,6 +31,7 @@ firebase.auth().onAuthStateChanged((user) => {
                     } else {
 
                     }
+
                     content += '<a href="' + theLink + '" class="user">';
                     content += '<div class="user-img">';
                     content += '<img src="' + ProfImage + '" alt="">';
@@ -41,6 +42,7 @@ firebase.auth().onAuthStateChanged((user) => {
                     content += '</div>';
 
                     content += '</a>';
+
 
                 })
                 $("#contacts").append(content);
@@ -71,6 +73,7 @@ firebase.auth().onAuthStateChanged((user) => {
                 time: chatTime,
                 messageFrom: CUserId,
                 messageTo: theUserId,
+                messageRead: false,
                 docId: sendChat.id,
                 date: date
             }).then(() => {
@@ -81,10 +84,10 @@ firebase.auth().onAuthStateChanged((user) => {
         }
 
         // pulling the chats from the db
-        firebase.firestore().collection("chats").get().then((querySnapsot) => {
+        firebase.firestore().collection("chats").get().then((querySnapshot) => {
 
             let contentChat = '';
-            querySnapsot.forEach((doc) => {
+            querySnapshot.forEach((doc) => {
                 let message = doc.data().message;
                 let time = doc.data().time;
                 let messageFrom = doc.data().messageFrom;
@@ -93,15 +96,15 @@ firebase.auth().onAuthStateChanged((user) => {
                 let date = doc.data().date;
 
                 if (messageFrom == CUserId && messageTo == theUserId) {
-                    content += '<div class="chat-bubble me">';
-                    content += '<p>' + message + '</p>';
-                    content += '<span>' + time + '</span>';
-                    content += '</div>';
+                    contentChat += '<div class="theChatTo">';
+                    contentChat += '<p>' + message + '</p>';
+                    contentChat += '<span>' + time + '</span>';
+                    contentChat += '</div>';
                 } else if (messageTo == CUserId && messageFrom == theUserId) {
-                    content += '<div class="chat-bubble you">';
-                    content += '<p>' + message + '</p>';
-                    content += '<span>' + time + '</span>';
-                    content += '</div>';
+                    contentChat += '<div class="theChatFrom">';
+                    contentChat += '<p>' + message + '</p>';
+                    contentChat += '<span>' + time + '</span>';
+                    contentChat += '</div>';
                 }
             })
             $("#allChats").append(contentChat);
